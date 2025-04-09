@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-between mt-4">
+    <h2 class="mb-0">Request Equipment</h2>  
+  </div>
+  <div class="row mt-3">
+    <div class="card">
+        <div class="card-header">
+            Order Equipment
+        </div>
+        <div class="card-body">
+            <form class="mb-3 mt-md-4" [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-md-5">
+                      <div class="mb-3">
+                        <label for="content" class="form-label">Hospitals</label>
+                        <select name="hospitalId" class="form-control" id="hospitalId" formControlName="hospitalId" (change)="onHospitalSelect($event)">
+                          <option value="null">Please Choose</option>
+                          <option *ngFor="let hos of hospitalList" [value]="hos.id">{{ hos.name }}</option>
+                        </select>
+                        <div *ngIf="itemForm.controls['hospitalId'].invalid && (itemForm.controls['hospitalId'].dirty || itemForm.controls['hospitalId'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['hospitalId'].errors" class="text-danger">Please choose hospital.</span>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="content" class="form-label">Equipment</label>
+                        <select name="equipmentId" class="form-control" id="equipmentId" formControlName="equipmentId">
+                          <option value="null">Please Choose</option>
+                          <option *ngFor="let eq of equipmentList" [value]="eq.id">{{ eq.name }}</option>
+                        </select>
+                        <div *ngIf="itemForm.controls['equipmentId'].invalid && (itemForm.controls['equipmentId'].dirty || itemForm.controls['equipmentId'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['equipmentId'].errors" class="text-danger">Please choose Equipment.</span>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="content" class="form-label">Order Date</label>
+                        <input type="date" name="orderDate" formControlName="orderDate" class="form-control" id="orderDate" placeholder="Order Date">
+                        <div *ngIf="itemForm.controls['orderDate'].invalid && (itemForm.controls['orderDate'].dirty || itemForm.controls['orderDate'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['orderDate'].errors" class="text-danger">Please Enter order Date.</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-5">
+                      <div class="mb-3">
+                        <label for="quantity" class="form-label">Quantity</label>
+                        <input type="number" name="quantity" formControlName="quantity" class="form-control" id="quantity" placeholder="Quantity">
+                        <div *ngIf="itemForm.controls['quantity'].invalid && (itemForm.controls['quantity'].dirty || itemForm.controls['quantity'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['quantity'].errors" class="text-danger">Please Enter Quantity.</span>
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-control" name="status" id="status" formControlName="status">
+                          <option value="null">Choose Status</option>
+                          <option value="Initiated">Initiated</option>
+                          <option value="Complete">Complete</option>
+                        </select>
+                        <div *ngIf="itemForm.controls['status'].invalid && (itemForm.controls['status'].dirty || itemForm.controls['status'].touched)" class="ng-dirty">
+                          <span *ngIf="itemForm.controls['status'].errors" class="text-danger">Please choose status.</span>
+                        </div>
+                      </div>
+                    </div>
+                 
+                    <div *ngIf="showMessage" class="alert alert-success mt-4" role="alert">
+                      {{ responseMessage }}
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="d-grid">
+                      <br>
+                      <button class="btn btn-outline-dark mt-1" type="submit">Submit</button>
+                    </div>
+                  </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  
